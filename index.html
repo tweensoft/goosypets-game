@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>GoosyPets Penguin Puzzle</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(#dff6ff,#eefcff);color:#26415a;overflow-x:hidden}
+.top{height:72px;padding:10px 16px;display:flex;align-items:center;gap:10px;background:#fff8e9;border-bottom:3px solid #d7c49a;position:sticky;top:0;z-index:5}
+.logo{font-weight:900;font-size:24px;color:#7a4e20;margin-right:auto}.pill{background:#fff;border:2px solid #d8c18e;border-radius:16px;padding:8px 12px;font-weight:700;font-size:13px}
+.wrap{display:grid;grid-template-columns:180px minmax(320px,1fr) 230px;gap:14px;padding:14px;min-height:calc(100vh - 72px)}
+.panel{background:#fffdf7;border:3px solid #c8a96e;border-radius:20px;padding:14px;box-shadow:0 5px 0 rgba(112,80,30,.12)}
+h2{margin:2px 0 10px;font-size:20px} .levels button,.tools button{width:100%;margin:6px 0;padding:11px;border:0;border-radius:14px;background:#eef7ff;font-weight:800;color:#36526c}
+.levels button.active{background:#ffdf72}.boardPanel{display:flex;flex-direction:column;align-items:center}
+.board{width:min(62vw,620px);aspect-ratio:4/3;background:#dcebf1;border:6px solid #8c6a3a;border-radius:14px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);overflow:hidden;touch-action:none}
+.cell{border:1px dashed rgba(60,88,110,.28);position:relative}.cell.good{box-shadow:inset 0 0 0 3px rgba(63,170,108,.7)}
+.tray{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;align-content:start;max-height:calc(100vh - 150px);overflow:auto;padding-right:3px}
+.piece{aspect-ratio:4/3;border:2px solid #6d5637;border-radius:8px;background-size:400% 400%;box-shadow:0 3px 6px rgba(0,0,0,.18);touch-action:none;cursor:grab}
+.drag{position:fixed;z-index:999;pointer-events:none;width:120px;height:90px;opacity:.88}
+.caption{font-weight:800;margin:10px 0 2px}.stats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px}.badge{background:#fff;border:2px solid #c8a96e;border-radius:12px;padding:7px 10px;font-weight:800}
+.overlay{position:fixed;inset:0;background:rgba(20,40,60,.5);display:none;align-items:center;justify-content:center;z-index:20;padding:20px}.card{background:white;border-radius:24px;padding:22px;max-width:520px;text-align:center;border:4px solid #f0c85c}
+.previewPic{width:100%;aspect-ratio:4/3;border-radius:16px;background-size:cover;background-position:center}
+@media(max-width:900px){.wrap{grid-template-columns:140px 1fr}.right{grid-column:1/-1}.tray{grid-template-columns:repeat(8,1fr);max-height:none}.board{width:min(72vw,640px)}}
+@media(max-width:700px){.wrap{display:block}.left{display:none}.board{width:94vw}.tray{grid-template-columns:repeat(4,1fr)}.top{height:62px}.pill:nth-of-type(-n+3){display:none}}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">GoosyPets</div><div class="pill">Home</div><div class="pill">Map</div><div class="pill">Pets</div><div class="pill">Games</div><div class="pill">🪙 127</div></div>
+<div class="wrap">
+  <div class="panel left"><h2>Puzzles</h2><div class="levels"><button class="active">Penguin ★</button><button>Penguin ★★</button><button>Penguin ★★★</button><button>Penguin ★★★★</button><button>Penguin ★★★★★</button></div></div>
+  <div class="panel boardPanel"><div class="caption">Penguin Puzzle · 4 × 4</div><div class="stats"><span class="badge" id="placed">0 / 16</span><span class="badge" id="moves">0 moves</span></div><div class="board" id="board"></div></div>
+  <div class="panel right"><h2>Pieces</h2><div class="tray" id="tray"></div><div class="tools"><button id="previewBtn">Preview</button><button id="hintBtn">Hint (3)</button><button id="shuffleBtn">Shuffle</button><button id="resetBtn">Reset</button></div></div>
+</div>
+<div class="overlay" id="overlay"><div class="card"><h2 id="ovTitle">Preview</h2><div class="previewPic" id="previewPic"></div><p id="ovText">Tap anywhere to close.</p></div></div>
+<script>
+const art = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#7fd7ff"/><stop offset="1" stop-color="#eafcff"/></linearGradient></defs><rect width="800" height="600" fill="url(#sky)"/><circle cx="650" cy="105" r="58" fill="#fff4a5"/><path d="M0 410L130 300l95 78 120-150 128 160 118-118 209 180v150H0z" fill="#cfeeff"/><path d="M0 470q120-55 240 0t240 0 320 0v130H0z" fill="#fff"/><g transform="translate(310 170)"><ellipse cx="95" cy="180" rx="115" ry="150" fill="#26384d"/><ellipse cx="95" cy="200" rx="82" ry="112" fill="#fff"/><circle cx="95" cy="70" r="88" fill="#26384d"/><ellipse cx="68" cy="75" rx="35" ry="45" fill="#fff"/><ellipse cx="122" cy="75" rx="35" ry="45" fill="#fff"/><circle cx="72" cy="75" r="8"/><circle cx="118" cy="75" r="8"/><path d="M95 88l-23 18 23 9 23-9z" fill="#ff9b32"/><path d="M4 182l-65 55 74 7zM186 182l65 55-74 7z" fill="#26384d"/><ellipse cx="50" cy="326" rx="55" ry="19" fill="#ff9b32"/><ellipse cx="140" cy="326" rx="55" ry="19" fill="#ff9b32"/></g><g fill="#8fd3e8"><circle cx="95" cy="150" r="18"/><circle cx="155" cy="105" r="11"/><circle cx="705" cy="205" r="15"/><circle cx="600" cy="165" r="9"/></g></svg>')}`;
+const board=document.getElementById('board'),tray=document.getElementById('tray'),placedEl=document.getElementById('placed'),movesEl=document.getElementById('moves');
+const overlay=document.getElementById('overlay'),previewPic=document.getElementById('previewPic'),ovTitle=document.getElementById('ovTitle'),ovText=document.getElementById('ovText');
+let pieces=[],moves=0,hints=3,dragging=null;
+function makePiece(i){const p=document.createElement('div');p.className='piece';p.dataset.i=i;p.style.backgroundImage=`url("${art}")`;p.style.backgroundPosition=`${(i%4)*100/3}% ${Math.floor(i/4)*100/3}%`;p.addEventListener('pointerdown',startDrag);return p}
+function init(){board.innerHTML='';tray.innerHTML='';pieces=[];moves=0;hints=3;for(let i=0;i<16;i++){const c=document.createElement('div');c.className='cell';c.dataset.i=i;board.appendChild(c);pieces.push(makePiece(i))}shuffle();update()}
+function shuffle(){pieces.filter(p=>!p.dataset.done).sort(()=>Math.random()-.5).forEach(p=>tray.appendChild(p))}
+function startDrag(e){if(this.dataset.done)return;e.preventDefault();dragging=this;const ghost=this.cloneNode(true);ghost.classList.add('drag');document.body.appendChild(ghost);this.style.visibility='hidden';moveGhost(e,ghost);const move=ev=>moveGhost(ev,ghost);const up=ev=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);ghost.remove();this.style.visibility='';dropPiece(ev,this)};window.addEventListener('pointermove',move);window.addEventListener('pointerup',up,{once:true})}
+function moveGhost(e,g){g.style.left=(e.clientX-60)+'px';g.style.top=(e.clientY-45)+'px'}
+function dropPiece(e,p){moves++;const el=document.elementFromPoint(e.clientX,e.clientY);const cell=el&&el.closest('.cell');if(cell&&cell.dataset.i===p.dataset.i){place(p,cell)}update()}
+function place(p,cell){p.dataset.done='1';p.removeEventListener('pointerdown',startDrag);p.style.width='100%';p.style.height='100%';p.style.border='0';p.style.borderRadius='0';cell.appendChild(p);cell.classList.add('good')}
+function update(){const n=pieces.filter(p=>p.dataset.done).length;placedEl.textContent=n+' / 16';movesEl.textContent=moves+' moves';document.getElementById('hintBtn').textContent='Hint ('+hints+')';if(n===16){setTimeout(()=>showOverlay('Puzzle Complete!','You earned 25 coins!'),180)}}
+function showOverlay(title,text){ovTitle.textContent=title;ovText.textContent=text;previewPic.style.backgroundImage=`url("${art}")`;overlay.style.display='flex'}
+document.getElementById('previewBtn').onclick=()=>showOverlay('Preview','Tap anywhere to close.');
+document.getElementById('shuffleBtn').onclick=shuffle;
+document.getElementById('resetBtn').onclick=init;
+document.getElementById('hintBtn').onclick=()=>{if(hints<1)return;const p=pieces.find(x=>!x.dataset.done);if(!p)return;place(p,board.children[+p.dataset.i]);hints--;update()};
+overlay.onclick=()=>overlay.style.display='none';
+init();
+</script>
+</body></html>
