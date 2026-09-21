@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>GoosyPets Coloring Book Demo</title>
+<style>
+:root{--wood:#74411f;--wood2:#4b2918;--paper:#fff8e8;--gold:#ffc044;--shadow:0 10px 24px rgba(36,18,6,.24)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;height:100%;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(#80d1fa 0 18%,#eaf8ff 18%);color:#3e2618}body{overflow:hidden}button{font:inherit}.app{height:100svh;padding:max(7px,env(safe-area-inset-top)) max(7px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(7px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:8px}.top{display:flex;align-items:center;gap:7px;background:linear-gradient(#89522c,#61351d);border:3px solid #3c2316;border-radius:18px;padding:8px 12px;color:#fff3dc;box-shadow:var(--shadow)}.brand{font-size:clamp(20px,3vw,38px);font-weight:1000;margin-right:auto;white-space:nowrap}.brand b{color:#ffd464}.nav{display:flex;gap:5px;overflow:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav button,.coins{border:0;background:#6b3a20;color:#fff1da;border-radius:11px;padding:8px 10px;font-weight:850;white-space:nowrap}.nav .on{outline:3px solid var(--gold)}.main{flex:1;min-height:0;display:grid;grid-template-columns:205px minmax(0,1fr) 235px;gap:10px}.panel{min-height:0;background:linear-gradient(#8c5730,#67391f);border:3px solid #3d2417;border-radius:19px;box-shadow:var(--shadow);padding:10px}.panel h2{margin:0 0 9px;text-align:center;color:#fff1d4;font-size:clamp(18px,2vw,28px)}.pets{display:flex;flex-direction:column;gap:8px}.pet{background:#f7e6c2;border:2px solid #704526;border-radius:14px;padding:8px;display:flex;align-items:center;gap:9px;font-weight:900}.pet.on{background:linear-gradient(#fff0a9,#ffd45d);box-shadow:inset 0 0 0 3px #fff7cb}.face{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:white;font-size:31px}.pet small{display:block;font-weight:700;opacity:.7}.book{min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}.title{align-self:center;background:linear-gradient(#8b542d,#61351d);border:3px solid #3c2316;border-radius:16px;padding:7px 18px;color:#fff1d5;text-align:center;font-weight:950;box-shadow:var(--shadow);font-size:clamp(18px,2.4vw,30px)}.title small{display:block;color:#ffe39b;font-size:.55em;margin-top:2px}.pageWrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}.page{position:relative;width:min(100%,calc((100svh - 175px)*1.14));aspect-ratio:760/660;background:#fffaf0;border:8px solid #7a4928;border-radius:20px;box-shadow:var(--shadow);overflow:hidden;touch-action:none}.paint,.line{position:absolute;inset:0;width:100%;height:100%}.paint{z-index:1;background:#fffaf0;touch-action:none}.line{z-index:2;pointer-events:none}.right{display:flex;flex-direction:column;gap:9px}.sub{background:#f8e7c6;border:2px solid #714528;border-radius:15px;padding:9px}.sub h3{margin:0 0 8px;font-size:18px}.palette{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.sw{aspect-ratio:1;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px #0003;outline:2px solid #704526}.sw.on{outline:4px solid #ffb400;transform:scale(1.05)}.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.tool{padding:9px 4px;border:2px solid #7a4a26;border-radius:12px;background:#fff7e7;font-weight:850}.tool.on{background:#ffd96b;box-shadow:inset 0 0 0 2px #fff3b3}.size{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;margin-top:8px}.size input{width:100%}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.act{border:0;border-radius:13px;padding:10px 8px;color:#fff;font-weight:900;box-shadow:0 4px 10px #0003}.undo{background:#2589ed}.clear{background:#d35a48}.save{grid-column:1/-1;background:#45c733}.hint{text-align:center;color:#fff3dc;font-size:12px;font-weight:750;opacity:.9}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:#442515;color:#fff3df;padding:10px 16px;border-radius:12px;font-weight:850;opacity:0;pointer-events:none;transition:.2s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){body{overflow:auto}.app{height:auto;min-height:100svh}.main{grid-template-columns:1fr}.left{display:none}.page{width:min(94vw,780px)}.right{display:grid;grid-template-columns:1fr 1fr}.right h2{grid-column:1/-1}.hint{grid-column:1/-1}.palette{grid-template-columns:repeat(6,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="brand">GOOSY<b>PETS</b></div><div class="nav"><button>Home</button><button>Map</button><button>Pets</button><button class="on">Games</button><button>Collection</button><button>Leaderboard</button><button>Shop</button></div><div class="coins">🪙 127</div></div>
+<div class="main">
+<aside class="panel left"><h2>🐾 Choose a Pet</h2><div class="pets"><div class="pet on"><div class="face">🐱</div><div>CookieCat<small>Jungle page</small></div></div><div class="pet"><div class="face">🐰</div><div>Noodle<small>Coming soon</small></div></div><div class="pet"><div class="face">🐼</div><div>Panda<small>Coming soon</small></div></div><div class="pet"><div class="face">🐸</div><div>Froggy<small>Coming soon</small></div></div><div class="pet"><div class="face">🐢</div><div>Turtle<small>Coming soon</small></div></div></div></aside>
+<section class="book"><div class="title">Color CookieCat<small>Bring CookieCat's jungle adventure to life!</small></div><div class="pageWrap"><div class="page" id="page"><canvas id="paint" class="paint"></canvas>
+<svg class="line" viewBox="0 0 760 660" xmlns="http://www.w3.org/2000/svg">
+<g fill="none" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M0 570 Q80 525 155 570 T310 565 T470 575 T620 560 T760 570"/>
+<path d="M10 100 Q70 25 140 85 Q170 15 235 85 Q290 20 345 88 Q390 30 450 95"/>
+<path d="M30 160 Q80 100 125 155 Q160 105 205 165"/>
+<path d="M610 50 Q650 10 700 55 Q735 15 760 45"/>
+<path d="M600 160 C630 125 670 125 700 160 C675 180 635 180 600 160Z"/>
+<circle cx="655" cy="150" r="5" fill="#111"/>
+<path d="M700 160 Q730 175 748 160 Q730 145 700 160Z"/>
+<path d="M620 170 Q610 220 625 260 M650 174 Q650 225 660 260 M680 172 Q690 220 685 260"/>
+<path d="M545 135 Q610 95 650 115 Q635 145 600 160"/>
+<path d="M560 165 Q520 210 535 260 Q575 230 590 190"/>
+<path d="M550 260 Q595 235 650 245 Q700 255 735 225"/>
+<path d="M520 315 Q570 260 630 290 Q590 320 555 350"/>
+<path d="M630 290 Q700 245 750 300"/>
+<path d="M540 380 Q600 330 670 365 Q625 395 585 430"/>
+<path d="M40 250 C80 185 135 195 150 245 C120 235 90 240 40 250Z"/>
+<path d="M35 280 C95 230 150 250 165 300 C110 285 80 285 35 280Z"/>
+<path d="M45 335 C100 290 155 315 165 365 C120 345 80 345 45 335Z"/>
+<path d="M65 410 C110 350 165 370 175 420 C125 405 100 410 65 410Z"/>
+<path d="M675 420 C720 360 755 385 760 430"/>
+<path d="M630 470 C685 400 745 420 760 480"/>
+<path d="M30 500 C90 430 150 450 175 520 C120 500 75 500 30 500Z"/>
+<path d="M560 505 C610 435 690 455 710 525"/>
+<path d="M160 495 q35-35 70 0 q-35 45-70 0 M185 472 v50"/>
+<path d="M585 500 q45-45 90 0 q-45 55-90 0 M630 470 v60"/>
+<path d="M105 455 q28-28 56 0 q-28 36-56 0 M133 435 v40"/>
+<path d="M210 330 q30-35 60 0 q-30 40-60 0 M240 305 v45"/>
+<path d="M285 255 C305 205 345 188 390 202 C430 190 470 212 486 255"/>
+<path d="M307 224 L287 172 L347 202 M430 202 L485 170 L475 235"/>
+<path d="M300 255 C278 290 280 340 302 365 C325 390 350 398 380 398 C410 398 442 390 462 365 C485 335 486 292 465 255"/>
+<ellipse cx="335" cy="285" rx="27" ry="33"/><ellipse cx="430" cy="285" rx="27" ry="33"/>
+<circle cx="339" cy="287" r="11" fill="#111"/><circle cx="426" cy="287" r="11" fill="#111"/>
+<path d="M378 308 q12 12 24 0 q-12 20-24 0Z"/>
+<path d="M388 326 q0 18-18 20 M388 326 q0 18 18 20"/>
+<path d="M315 350 Q335 368 360 360 M415 360 Q440 368 460 350"/>
+<path d="M325 382 Q300 425 312 492 Q330 525 365 520 Q380 475 375 420"/>
+<path d="M445 382 Q470 425 458 492 Q440 525 405 520 Q390 475 395 420"/>
+<path d="M350 395 Q375 380 405 395 Q420 440 408 505 Q380 530 347 505 Q335 442 350 395Z"/>
+<path d="M462 395 Q520 365 548 410 Q565 455 530 480 Q500 495 470 475"/>
+<path d="M520 472 Q560 455 575 420 Q592 380 560 355 Q535 332 505 350"/>
+<path d="M305 490 Q275 505 270 540 Q300 552 330 535 M460 490 Q490 505 495 540 Q465 552 435 535"/>
+<circle cx="262" cy="325" r="8"/><path d="M250 325 q-25-25-40 0 q18 15 40 0 M274 325 q25-25 40 0 q-18 15-40 0 M262 313 q-12-22 0-35 q12 13 0 35 M262 337 q-12 22 0 35 q12-13 0-35"/>
+<path d="M90 215 q20-25 40 0 q-20 25-40 0 M110 190 v50"/>
+<circle cx="120" cy="535" r="12"/><circle cx="95" cy="545" r="10"/><circle cx="145" cy="548" r="10"/>
+<path d="M15 600 Q100 555 190 610 M190 610 Q285 555 365 612 M365 612 Q470 555 550 610 M550 610 Q660 555 750 605"/>
+</g>
+</svg>
+</div></div></section>
+<aside class="panel right"><h2>🎨 Colors & Tools</h2><div class="sub"><h3>Colors</h3><div class="palette" id="palette"></div></div><div class="sub"><h3>Tools</h3><div class="tools"><button class="tool on" data-tool="crayon">🖍️<br>Crayon</button><button class="tool" data-tool="brush">🖌️<br>Brush</button><button class="tool" data-tool="eraser">🧽<br>Eraser</button></div><div class="size"><span>Size</span><input id="size" type="range" min="4" max="42" value="18"></div></div><div class="sub"><div class="actions"><button class="act undo" id="undo">↶ Undo</button><button class="act clear" id="clear">Clear</button><button class="act save" id="save">⬇ Save Art</button></div></div><div class="hint">Use your finger or Apple Pencil directly on the page.</div></aside>
+</div></div><div class="toast" id="toast">Saved!</div>
+<script>
+(()=>{const canvas=document.getElementById('paint'),ctx=canvas.getContext('2d'),page=document.getElementById('page'),palette=document.getElementById('palette'),size=document.getElementById('size'),toast=document.getElementById('toast');const colors=['#ff2d2d','#ff8c1a','#ffd426','#1bbb69','#1677f2','#8c3df0','#f248ad','#8b542c','#3f4248','#ffffff','#26cfe8','#ffb0c8'];let color=colors[1],tool='crayon',drawing=false,last=null,history=[];colors.forEach((c,i)=>{const b=document.createElement('button');b.className='sw'+(i===1?' on':'');b.style.background=c;b.onclick=()=>{color=c;document.querySelectorAll('.sw').forEach(x=>x.classList.remove('on'));b.classList.add('on');if(tool==='eraser')setTool('brush')};palette.appendChild(b)});document.querySelectorAll('.tool').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));function setTool(t){tool=t;document.querySelectorAll('.tool').forEach(x=>x.classList.toggle('on',x.dataset.tool===t))}function fit(){const r=page.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2.5),old=document.createElement('canvas');old.width=canvas.width;old.height=canvas.height;old.getContext('2d').drawImage(canvas,0,0);canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#fffaf0';ctx.fillRect(0,0,r.width,r.height);if(old.width&&old.height)ctx.drawImage(old,0,0,old.width,old.height,0,0,r.width,r.height)}function pos(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}function snap(){history.push(canvas.toDataURL());if(history.length>15)history.shift()}function start(e){e.preventDefault();snap();drawing=true;last=pos(e);draw(last,last);canvas.setPointerCapture?.(e.pointerId)}function move(e){if(!drawing)return;e.preventDefault();const p=pos(e);draw(last,p);last=p}function end(){drawing=false;last=null}function draw(a,b){const w=+size.value;ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.lineWidth=w;ctx.strokeStyle=tool==='eraser'?'#fffaf0':color;ctx.globalAlpha=tool==='crayon'?.46:1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();if(tool==='crayon'){ctx.globalAlpha=.2;for(let i=0;i<3;i++){const ox=(Math.random()-.5)*w*.4,oy=(Math.random()-.5)*w*.4;ctx.beginPath();ctx.moveTo(a.x+ox,a.y+oy);ctx.lineTo(b.x+ox,b.y+oy);ctx.stroke()}}ctx.restore()}canvas.addEventListener('pointerdown',start,{passive:false});canvas.addEventListener('pointermove',move,{passive:false});canvas.addEventListener('pointerup',end);canvas.addEventListener('pointercancel',end);document.getElementById('undo').onclick=()=>{const u=history.pop();if(!u)return;const im=new Image();im.onload=()=>{ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(im,0,0,canvas.width,canvas.height);ctx.restore()};im.src=u};document.getElementById('clear').onclick=()=>{snap();const r=page.getBoundingClientRect();ctx.fillStyle='#fffaf0';ctx.fillRect(0,0,r.width,r.height)};document.getElementById('save').onclick=()=>{const out=document.createElement('canvas');out.width=canvas.width;out.height=canvas.height;const o=out.getContext('2d');o.drawImage(canvas,0,0);const svg=document.querySelector('.line');const xml=new XMLSerializer().serializeToString(svg);const blob=new Blob([xml],{type:'image/svg+xml'}),url=URL.createObjectURL(blob),im=new Image();im.onload=()=>{o.drawImage(im,0,0,out.width,out.height);URL.revokeObjectURL(url);const a=document.createElement('a');a.download='goosypets-cookiecat-art.png';a.href=out.toDataURL('image/png');a.click();toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400)};im.src=url};new ResizeObserver(fit).observe(page);requestAnimationFrame(fit)})();
+</script>
+</body></html>
